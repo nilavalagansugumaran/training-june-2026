@@ -17,6 +17,13 @@ public class DemoApplicationArgumentsApplication {
 
 		System.out.println(ctx.getBean("not.so.simple.bean", MyBean.class).toString());
 		System.out.println(ctx.getBean("not.so.simple.bean", MyBean.class).hashCode());
+
+		System.out.println(ctx.getBean("myDefaultBean", MyBean.class).toString());
+		System.out.println(ctx.getBean("myDefaultBean", MyBean.class).hashCode());
+
+		System.out.println(ctx.getBean("myDefaultBean", MyBean.class).toString());
+		System.out.println(ctx.getBean("myDefaultBean", MyBean.class).hashCode());
+
 	}
 
 }

@@ -12,10 +12,10 @@ public class MyConfiguration {
     @Bean(name = {"simple.bean", "not.so.simple.bean"})
     @Scope("prototype")
     public MyBean myBean(){
-        return new MyBean();
+        return new MyBean(200);
     }
     @Bean
     public MyBean myDefaultBean(){
-        return new MyBean();
+        return new MyBean(0);
     }
 }
