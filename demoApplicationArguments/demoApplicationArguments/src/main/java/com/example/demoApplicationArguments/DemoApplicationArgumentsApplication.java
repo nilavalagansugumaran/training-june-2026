@@ -11,6 +11,12 @@ public class DemoApplicationArgumentsApplication {
 
 		ApplicationContext ctx = SpringApplication.run(DemoApplicationArgumentsApplication.class, args);
 		ctx.getBean(MyArgumentProcessor.class).accessArguments();
+
+		System.out.println(ctx.getBean("simple.bean", MyBean.class).toString());
+		System.out.println(ctx.getBean("simple.bean", MyBean.class).hashCode());
+
+		System.out.println(ctx.getBean("not.so.simple.bean", MyBean.class).toString());
+		System.out.println(ctx.getBean("not.so.simple.bean", MyBean.class).hashCode());
 	}
 
 }
