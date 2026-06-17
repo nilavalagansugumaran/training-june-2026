@@ -1,6 +1,7 @@
 package com.example.demoConfigProps;
 
 import com.example.demoConfigProps.component.ContactComponent;
+import com.example.demoConfigProps.component.SimpleBean;
 import com.example.demoConfigProps.configuration.ContactConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,8 @@ public class DemoConfigPropsApplication {
 		ApplicationContext ctx = SpringApplication.run(DemoConfigPropsApplication.class, args);
 		System.out.println(ctx.getBean(ContactComponent.class));
 		System.out.println(ctx.getBean(ContactConfiguration.class));
+
+		System.out.println(ctx.getBean(SimpleBean.class));
 	}
 
 }
