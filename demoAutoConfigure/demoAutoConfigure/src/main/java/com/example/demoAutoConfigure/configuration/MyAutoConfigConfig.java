@@ -25,7 +25,7 @@ public class MyAutoConfigConfig {
 
     @Bean
     @ConditionalOnProperty(name = "enabled.bean", matchIfMissing = true)
-    public MyAutoConfigBean  DefaultBean() {
+    public MyAutoConfigBean  defaultBean() {
         return new DefaultBean();
     }
 }
