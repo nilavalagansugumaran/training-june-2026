@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: demoConfigProps
+contact:
+  name: nilaYAML
+  email: tes@test.com
+  address:
+    postcode: RX100JG
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+contact:
+  name: nilaYAMLDEVProfile
+  email: tes@testdev.com
+  address:
+    postcode: RX100JGDEV
