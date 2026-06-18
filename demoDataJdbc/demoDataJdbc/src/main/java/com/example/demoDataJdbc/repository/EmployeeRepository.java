@@ -4,8 +4,11 @@ import com.example.demoDataJdbc.model.Employee;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -21,6 +24,12 @@ public class EmployeeRepository {
 
         return  null;
     }
+
+    public Employee getEmployeeByName(String name){
+
+        return  null;
+    }
+
     public void updateEmpInDb(Integer id, Employee employee) {
 
     }
@@ -34,7 +43,9 @@ public class EmployeeRepository {
     }
 
     public List<Employee> getAllEmpFromDb() {
-        return null;
+
+        String sql = "select * from employees";
+        return jdbcTemplate.query(sql, new EmployeeRowMapper());
     }
 
     @PostConstruct
@@ -49,5 +60,16 @@ public class EmployeeRepository {
                 new Object[]{"James", 21000});
     }
 
+    public static class EmployeeRowMapper implements RowMapper<Employee> {
+
+        @Override
+        public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return Employee.builder()
+                    .id(rs.getInt("id"))
+                    .name(rs.getString("name"))
+                    .salary(rs.getDouble("salary"))
+                    .build();
+        }
+    }
 
 }
