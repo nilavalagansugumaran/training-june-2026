@@ -19,7 +19,7 @@ public class EmployeeController {
     @Value("${enabled.service}")
     private String jpaEnabled;
 
-    private EmployeeRepository repository;
+   private EmployeeRepository repository;
 
     private EmployeeService service;
 
@@ -29,12 +29,13 @@ public class EmployeeController {
         this.service = service;
     }
 
+
     @RequestMapping(method = RequestMethod.GET)
     public Employee getEmployee(@RequestParam Integer id) {
         if(jpaEnabled.equals("jpa")) {
             return service.getEmployeeFromDB(id);
         }
-        return  repository.getEmployeeFromDB(id);
+       return  repository.getEmployeeFromDB(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/all")
@@ -60,8 +61,10 @@ public class EmployeeController {
 
         if(jpaEnabled.equals("jpa")) {
             service.updateEmpInDb(id, employee);
-        }
-        repository.updateEmpInDb(id, employee);
+       } else {
+           repository.updateEmpInDb(id, employee);
+     }
+
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
@@ -69,8 +72,10 @@ public class EmployeeController {
     public void deleteEmployee(@PathVariable Integer id) {
         if(jpaEnabled.equals("jpa")) {
             service.deleteEmpInDb(id);
+        } else {
+            repository.deleteEmpInDb(id);
         }
-        repository.deleteEmpInDb(id);
+
     }
 
 }
