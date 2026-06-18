@@ -34,9 +34,13 @@ public class EmployeeRepository {
 
     public void updateEmpInDb(Integer id, Employee employee) {
 
+        String sql = "update employees set salary = ? where id = ?";
+        jdbcTemplate.update(sql,employee.getSalary(), id);
+
     }
     public void deleteEmpInDb(Integer id) {
-
+        String sql = "delete from employees where id = ?";
+        jdbcTemplate.update(sql, id);
     }
 
     public Employee createEmpInDb(Employee employee) {
