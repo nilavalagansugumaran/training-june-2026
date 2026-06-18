@@ -39,26 +39,37 @@ public class EmployeeController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/all")
     public List<Employee> getAllEmployee() {
-
+        if(jpaEnabled.equals("jpa")) {
+            return service.getAllEmpFromDb();
+        }
         return  repository.getAllEmpFromDb();
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Employee createEmployee(@RequestBody Employee employee) {
-
+        if(jpaEnabled.equals("jpa")) {
+            return service.createEmpInDb(employee);
+        }
         return  repository.createEmpInDb(employee);
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
+
+        if(jpaEnabled.equals("jpa")) {
+            service.updateEmpInDb(id, employee);
+        }
         repository.updateEmpInDb(id, employee);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable Integer id) {
+        if(jpaEnabled.equals("jpa")) {
+            service.deleteEmpInDb(id);
+        }
         repository.deleteEmpInDb(id);
     }
 
