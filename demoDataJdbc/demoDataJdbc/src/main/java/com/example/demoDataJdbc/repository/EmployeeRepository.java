@@ -22,12 +22,14 @@ public class EmployeeRepository {
     }
     public Employee getEmployeeFromDB(Integer id){
 
-        return  null;
+        String sql = "select * from employees where id=?";
+        return jdbcTemplate.queryForObject(sql, new EmployeeRowMapper(), id);
     }
 
     public Employee getEmployeeByName(String name){
 
-        return  null;
+        String sql = "select * from employees where name=?";
+        return jdbcTemplate.queryForObject(sql, new EmployeeRowMapper(), name);
     }
 
     public void updateEmpInDb(Integer id, Employee employee) {
@@ -39,7 +41,10 @@ public class EmployeeRepository {
 
     public Employee createEmpInDb(Employee employee) {
 
-        return  null;
+        jdbcTemplate.update("insert into EMPLOYEES (name, salary) " +
+                        "values (?, ?)",
+                new Object[]{employee.getName(), employee.getSalary()});
+        return getEmployeeByName(employee.getName());
     }
 
     public List<Employee> getAllEmpFromDb() {
