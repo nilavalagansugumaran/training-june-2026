@@ -1,5 +1,6 @@
 package com.example.demoDataMongo.model;
 
+import com.example.demoDataMongo.validations.ValidTitle;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +19,7 @@ public class Book {
     private String id;
 
 
-    @NotNull(message = "title can not be null")
-    @NotBlank(message = "Title can not be blank")
-    @Size(min = 10, max = 20, message = "Book title needs be between 10 and 20 characters")
+    @ValidTitle(message = "Title can not be blank or empty or null. And it must be between 10 and 20 characters")
     @Field
     private String title;
 
