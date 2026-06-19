@@ -24,7 +24,7 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Book createBook(@Valid @RequestBody Book book){
+    public Book createBook(@RequestBody Book book){
         return repository.save(book);
     }
 
