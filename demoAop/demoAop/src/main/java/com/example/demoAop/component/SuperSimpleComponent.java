@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SuperSimpleComponent {
 
+    //Joint point
     public void messageMe(){
         log.info("messageMe() called from SuperSimpleComponent");
     }
