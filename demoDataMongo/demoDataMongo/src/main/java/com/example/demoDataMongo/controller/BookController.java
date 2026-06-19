@@ -24,7 +24,7 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Book createBook(@RequestBody Book book){
+    public Book createBook(@Valid @RequestBody Book book){
         return repository.save(book);
     }
 
@@ -32,6 +32,25 @@ public class BookController {
     public Book getBookById(@PathVariable String id){
 
         return repository.findById(id).get();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String>
+    handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("errorCode", String.valueOf(exception.getBody().getStatus()));
+
+        exception.getBindingResult().getAllErrors().forEach((e) -> {
+
+            String fieldName = ((FieldError)e).getField();
+            String errormessage = e.getDefaultMessage();
+            errors.put(fieldName, errormessage);
+        });
+        return errors;
+
     }
 }
 
